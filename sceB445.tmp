@@ -1,0 +1,117 @@
+[gd_scene load_steps=10 format=3 uid="uid://dh1e0cnfc80p5"]
+
+[ext_resource type="Shader" path="res://SceneTransitions/scene_transition_rect.gdshader" id="1_83ifd"]
+[ext_resource type="Script" path="res://SceneTransitions/scene_transition_rect.gd" id="1_i51ak"]
+[ext_resource type="Texture2D" uid="uid://b6kgofo521oer" path="res://Masks/curtain.png" id="2_ohvu7"]
+[ext_resource type="Texture2D" uid="uid://bd6golhimu012" path="res://Masks/from_center.png" id="4_ui6gw"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_88tsg"]
+shader = ExtResource("1_83ifd")
+shader_parameter/cutoff = 0.0
+shader_parameter/smooth_size = 0.3
+shader_parameter/mask = ExtResource("2_ohvu7")
+
+[sub_resource type="Animation" id="Animation_jwyiv"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:material:shader_parameter/mask")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("2_ohvu7")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:material:shader_parameter/cutoff")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_72fpj"]
+resource_name = "Curtain"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:material:shader_parameter/mask")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("2_ohvu7")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:material:shader_parameter/cutoff")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+
+[sub_resource type="Animation" id="Animation_2dvi2"]
+resource_name = "Center"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:material:shader_parameter/mask")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("4_ui6gw")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:material:shader_parameter/cutoff")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_mb7h1"]
+_data = {
+"Center": SubResource("Animation_2dvi2"),
+"Curtain": SubResource("Animation_72fpj"),
+"RESET": SubResource("Animation_jwyiv")
+}
+
+[node name="SceneTransitionRect" type="ColorRect"]
+process_mode = 3
+material = SubResource("ShaderMaterial_88tsg")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 1)
+script = ExtResource("1_i51ak")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_mb7h1")
+}

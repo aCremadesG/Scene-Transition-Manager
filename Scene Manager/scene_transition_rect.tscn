@@ -1,0 +1,24 @@
+[gd_scene load_steps=5 format=3 uid="uid://do2jb7xhyynll"]
+
+[ext_resource type="Shader" path="res://SceneTransitions/scene_transition_rect.gdshader" id="1_83ifd"]
+[ext_resource type="Script" path="res://SceneTransitions/scene_transition_rect.gd" id="1_i51ak"]
+[ext_resource type="Texture2D" uid="uid://b6kgofo521oer" path="res://Masks/curtain.png" id="2_ohvu7"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ru6yq"]
+shader = ExtResource("1_83ifd")
+shader_parameter/cutoff = 1.0
+shader_parameter/smooth_size = 0.3
+shader_parameter/mask = ExtResource("2_ohvu7")
+
+[node name="SceneTransitionRect" type="CanvasLayer"]
+process_mode = 3
+script = ExtResource("1_i51ak")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_ru6yq")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
