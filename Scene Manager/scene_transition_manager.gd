@@ -1,6 +1,6 @@
 extends Node
 
-const SCENE_TRANSITION_RECT = preload("res://Scene Manager/scene_transition_rect.tscn")
+@export var SCENE_TRANSITION_RECT: PackedScene
 var transition_ins: Node
 
 func transition_from(animation: CompressedTexture2D):

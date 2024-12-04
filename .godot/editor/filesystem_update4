@@ -1,6 +1,2 @@
-res://scene_transition_rect.gd
-res://scene_transition_manager.gd
-res://scene_manager.tscn
-res://scene_manager.gd
 res://Scene Manager/scene_manager.tscn
 res://Scene Manager/scene_transition_manager.gd
